@@ -9,7 +9,7 @@ function signIn(){
  
   // Parameters to pass to OAuth 2.0 endpoint.
   var params = {'client_id': '648765015707-i0q7h6u0hcc3dejv7difctbc249bm40v.apps.googleusercontent.com',
-                'redirect_uri': 'https://www.islamgpt.com/chat.html',
+                'redirect_uri': 'http://www.islamgpt.com/chat.html',
                 'response_type': 'token',
                 'scope':'https://www.googleapis.com/auth/userinfo.profile',
                 'include_granted_scopes': 'true',
