@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IslamGPT</title>
+    <link rel="stylesheet" href="https://fonts.apple.com/fonts/san-francisco" />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      .chat-header {
+        background-color: white;
+        padding: 10px;
+      }
+      .chat-header h1, .chat-header h3 {
+        color: white;
+      }
+      .disabled input[type="text"] {
+        background-color: #f5f5f5;
+        cursor: not-allowed;
+      }
+    </style>
+  </head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-50R21MFNQC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-50R21MFNQC');
+</script>
+  <body>
+    <header>
+      <div class="loader" id="loader"></div>
+    </header>
+    <main>
+      <div class="container" style="color: black; text-align: center;">
+        <div class="chat-container" style="color: black; text-align: center;">
+          <div class="chat-header" style="color: black; text-align: center;">
+         
+<h2 id="name" style="position: absolute; top: 0; left: 10;">Salams   </h2>
+<img id="image" style="float: left; clear: both; margin-top: 30px; top: 100; left: 1;">
+
+
+            <h1 style="color: black;">Welcome to IslamGPT</h1>
+            <h3 style="color: black; text-align: center;">Ask a question, get advice from an AI Scholar.</h3>
+          </div>
+          <div class="chat-box">
+            <div class="chat-messages" id="output-box"></div>
+            <form id="input-form">
+              <div class="input-group">
+                <input type="text" id="input-box" placeholder="Ask a question (Hit Enter)" />
+                <button type="submit" class="send-btn">
+                  <i class="fa fa-paper-plane"></i>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer>
+      <button onclick="logout()">Logout</button>
+      <div class="container">
+        <button class="contact-btn"><a href="mailto:Islamgpt00@gmail.com" style="color: white; font-size: 24px;">Contact Us</a></button>
+      </div>
+    </footer>
+    <script src="script.js"></script>
+    <script>
+  // Parse query string to see if page request is coming from OAuth 2.0 server.
+  var params = {};
+  var regex = /([^&=]+)=([^&]*)/g,
+    m;
+  while ((m = regex.exec(location.href))) {
+    params[decodeURIComponent(m[1])] = decodeURIComponent(m[2]);
+  }
+  if (Object.keys(params).length > 0) {
+    localStorage.setItem("authInfo", JSON.stringify(params));
+  }
+  window.history.pushState({}, document.title, "/" + "profile.html");
+  let info = JSON.parse(localStorage.getItem("authInfo"));
+  console.log(info["access_token"]);
+  console.log(info["expires_in"]);
+</script>
+<script>
+  fetch("https://www.googleapis.com/oauth2/v3/userinfo", {
+    headers: {
+      Authorization: `Bearer ${info["access_token"]}`,
+    },
+  })
+    .then((data) => data.json())
+    .then((info) => {
+      console.log(info);
+      document.getElementById("name").innerHTML += info.name;
+      document.getElementById("image").setAttribute("src", info.picture);
+    });
+</script>
+<script>
+  function logout() {
+    fetch(
+      "https://oauth2.googleapis.com/revoke?token=" + info["access_token"],
+      {
+        method: "POST",
+        headers: {
+          "Content-type": "application/x-www-form-urlencoded",
+        },
+      }
+    ).then((data) => {
+      location.href = "https://islamgpt.w3spaces.com/index.html";
+    });
+  }
+</script>
+<script>
+  // get the form element by its id
+  const form = document.getElementById("input-form");
+
+  // keep track of the number of questions asked
+  let questionCount = 0;
+
+  // add an event listener to the form submit event
+  form.addEventListener("submit", (event) => {
+    // increment the question count
+    questionCount++;
+
+    // check if we have answered 2 questions
+    if (questionCount >= 2) {
+      // disable the form
+      form.classList.add("disabled");
+
+      // redirect to the payment page
+      window.location.href = "payment.html";
+    }
+  });
+</script>
+</body>
+</html>
