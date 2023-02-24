@@ -65,7 +65,7 @@
         <button class="contact-btn"><a href="mailto:Islamgpt00@gmail.com" style="color: white; font-size: 24px;">Contact Us</a></button>
       </div>
     </footer>
-    <script src="script.js"></script>
+    <script src="script-old.js"></script>
     <script>
   // Parse query string to see if page request is coming from OAuth 2.0 server.
   var params = {};
@@ -106,31 +106,9 @@
         },
       }
     ).then((data) => {
-      location.href = "https://islamgpt.w3spaces.com/index.html";
+      location.href = "https://www.islamgpt.chat/index.html";
     });
   }
-</script>
-<script>
-  // get the form element by its id
-  const form = document.getElementById("input-form");
-
-  // keep track of the number of questions asked
-  let questionCount = 0;
-
-  // add an event listener to the form submit event
-  form.addEventListener("submit", (event) => {
-    // increment the question count
-    questionCount++;
-
-    // check if we have answered 2 questions
-    if (questionCount >= 2) {
-      // disable the form
-      form.classList.add("disabled");
-
-      // redirect to the payment page
-      window.location.href = "payment.html";
-    }
-  });
 </script>
 </body>
 </html>
